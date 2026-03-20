@@ -74,8 +74,8 @@
           btnLoading.style.display = 'inline-flex';
 
           try {
-            // Detectar ambiente — tentar /api/verify (Vercel) primeiro, fallback para api/verify.php (XAMPP)
-            const apiUrls = ['/api/verify', 'api/verify.php'];
+            // Tentar múltiplos endpoints: Netlify, Vercel, XAMPP
+            const apiUrls = ['/.netlify/functions/verify', '/api/verify', 'api/verify.php'];
             let lastError = null;
             let data = null;
 
