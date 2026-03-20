@@ -1,0 +1,3 @@
+# Arquivos locais (não enviar para Git/deploy)
+api/verify.php
+files/
