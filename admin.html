@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — Prota Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+  <div id="admin-login" class="admin-login">
+    <div class="admin-login__card">
+      <div class="admin-login__logo">
+        <img src="prota-community-logo.png" alt="Prota Community">
+      </div>
+      <h1>Painel Admin</h1>
+      <p class="admin-login__sub">Digite sua senha para acessar</p>
+      <form id="login-form" class="admin-login__form">
+        <input type="password" id="login-password" placeholder="Senha" required autocomplete="current-password">
+        <button type="submit" class="btn btn--primary">Entrar</button>
+      </form>
+      <div id="login-setup" class="admin-login__setup" style="display:none">
+        <p>Primeira vez? Defina uma senha forte:</p>
+        <form id="setup-form" class="admin-login__form">
+          <input type="password" id="setup-password" placeholder="Nova senha (mín. 8 caracteres)" minlength="8" required>
+          <div id="password-strength" class="password-strength"></div>
+          <input type="password" id="setup-confirm" placeholder="Confirmar senha" minlength="8" required>
+          <button type="submit" class="btn btn--primary">Definir e entrar</button>
+        </form>
+      </div>
+      <p id="login-error" class="admin-login__error"></p>
+    </div>
+  </div>
+
+  <div id="admin-panel" class="admin-panel" style="display:none">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__logo">
+        <img src="prota-community-logo.png" alt="Prota">
+      </div>
+      <nav class="admin-sidebar__nav">
+        <a href="#" class="admin-nav__item active" data-tab="dashboard">
+          <span class="admin-nav__icon">◉</span>
+          Dashboard
+        </a>
+        <a href="#" class="admin-nav__item" data-tab="produtos">
+          <span class="admin-nav__icon">▤</span>
+          Produtos
+        </a>
+        <a href="#" class="admin-nav__item" data-tab="alertas">
+          <span class="admin-nav__icon">!</span>
+          Alertas
+          <span id="alert-badge" class="admin-nav__badge">0</span>
+        </a>
+        <a href="#" class="admin-nav__item" data-tab="categorias">
+          <span class="admin-nav__icon">≡</span>
+          Categorias
+        </a>
+        <a href="#" class="admin-nav__item" data-tab="exportar">
+          <span class="admin-nav__icon">⬇</span>
+          Exportar / Importar
+        </a>
+      </nav>
+      <div class="admin-sidebar__footer">
+        <button type="button" id="btn-logout" class="admin-logout">Sair</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1 id="admin-title">Dashboard</h1>
+        <div class="admin-header__actions">
+          <span id="override-status" class="admin-status"></span>
+          <a href="index.html" target="_blank" class="btn btn--ghost-sm">Ver site</a>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <!-- Dashboard -->
+        <section id="tab-dashboard" class="admin-tab active">
+          <div class="admin-stats">
+            <div class="admin-stat">
+              <span class="admin-stat__value" id="stat-produtos">0</span>
+              <span class="admin-stat__label">Produtos</span>
+            </div>
+            <div class="admin-stat">
+              <span class="admin-stat__value" id="stat-categorias">0</span>
+              <span class="admin-stat__label">Categorias</span>
+            </div>
+            <div class="admin-stat admin-stat--warning">
+              <span class="admin-stat__value" id="stat-sem-arquivo">0</span>
+              <span class="admin-stat__label">Sem arquivo/link</span>
+            </div>
+            <div class="admin-stat admin-stat--info">
+              <span class="admin-stat__value" id="stat-sem-img">0</span>
+              <span class="admin-stat__label">Sem imagem</span>
+            </div>
+            <div class="admin-stat admin-stat--success">
+              <span class="admin-stat__value" id="stat-links">0</span>
+              <span class="admin-stat__label">Links externos</span>
+            </div>
+          </div>
+          <div class="admin-quick-actions">
+            <button type="button" class="btn btn--primary" data-action="add-product">+ Novo produto</button>
+            <a href="#" class="btn btn--ghost" data-tab="alertas">Ver alertas</a>
+          </div>
+        </section>
+
+        <!-- Produtos -->
+        <section id="tab-produtos" class="admin-tab">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <input type="search" id="search-produtos" placeholder="Buscar produtos...">
+            </div>
+            <select id="filter-categoria">
+              <option value="">Todas categorias</option>
+            </select>
+            <select id="filter-status">
+              <option value="">Todos</option>
+              <option value="ok">OK</option>
+              <option value="sem-arquivo">Sem arquivo/link</option>
+              <option value="sem-img">Sem imagem</option>
+              <option value="link">Link externo</option>
+            </select>
+            <button type="button" class="btn btn--primary" data-action="add-product">+ Novo</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Categoria</th>
+                  <th>Arquivo / Link</th>
+                  <th>Imagem</th>
+                  <th>Status</th>
+                  <th width="120">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="produtos-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Alertas -->
+        <section id="tab-alertas" class="admin-tab">
+          <div class="admin-alerts" id="alertas-list"></div>
+        </section>
+
+        <!-- Categorias -->
+        <section id="tab-categorias" class="admin-tab">
+          <div class="admin-toolbar">
+            <button type="button" class="btn btn--primary" data-action="add-category">+ Nova categoria</button>
+          </div>
+          <div class="admin-cards" id="categorias-list"></div>
+        </section>
+
+        <!-- Exportar / Importar -->
+        <section id="tab-exportar" class="admin-tab">
+          <div class="admin-export-grid">
+            <div class="admin-export-card">
+              <h3>Exportar data.js</h3>
+              <p>Baixe o arquivo data.js atualizado para substituir o original.</p>
+              <button type="button" class="btn btn--primary" id="btn-export-js">Baixar data.js</button>
+            </div>
+            <div class="admin-export-card">
+              <h3>Aplicar no navegador</h3>
+              <p>Salva as alterações no navegador. O site usará estes dados até você limpar.</p>
+              <button type="button" class="btn btn--primary" id="btn-apply">Aplicar alterações</button>
+              <button type="button" class="btn btn--ghost" id="btn-remove-override">Remover override</button>
+            </div>
+            <div class="admin-export-card">
+              <h3>Importar JSON</h3>
+              <p>Carregue um arquivo JSON com categorias e produtos.</p>
+              <input type="file" id="import-file" accept=".json" style="display:none">
+              <button type="button" class="btn btn--primary" id="btn-import">Selecionar arquivo</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Produto -->
+  <div id="modal-produto" class="admin-modal">
+    <div class="admin-modal__backdrop"></div>
+    <div class="admin-modal__content">
+      <div class="admin-modal__head">
+        <h2 id="modal-produto-title">Novo produto</h2>
+        <button type="button" class="admin-modal__close" aria-label="Fechar">&times;</button>
+      </div>
+      <form id="form-produto" class="admin-modal__body">
+        <input type="hidden" id="produto-index" value="-1">
+        <div class="admin-form-group">
+          <label for="produto-nome">Nome *</label>
+          <input type="text" id="produto-nome" required>
+        </div>
+        <div class="admin-form-group">
+          <label for="produto-categoria">Categoria *</label>
+          <select id="produto-categoria" required></select>
+        </div>
+        <div class="admin-form-group">
+          <label for="produto-arquivo">Arquivo ou URL *</label>
+          <input type="text" id="produto-arquivo" placeholder="files/nome.pdf ou https://...">
+          <small>Use caminho relativo (files/xxx) ou URL completa para links externos</small>
+        </div>
+        <div class="admin-form-group">
+          <label for="produto-img">Imagem (opcional)</label>
+          <input type="text" id="produto-img" placeholder="photos/xxx.jpg">
+        </div>
+        <div class="admin-form-group">
+          <label for="produto-desc">Descrição *</label>
+          <input type="text" id="produto-desc" required>
+        </div>
+        <div class="admin-modal__foot">
+          <button type="button" class="btn btn--ghost admin-modal-cancel">Cancelar</button>
+          <button type="submit" class="btn btn--primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Categoria -->
+  <div id="modal-categoria" class="admin-modal">
+    <div class="admin-modal__backdrop"></div>
+    <div class="admin-modal__content">
+      <div class="admin-modal__head">
+        <h2 id="modal-categoria-title">Nova categoria</h2>
+        <button type="button" class="admin-modal__close" aria-label="Fechar">&times;</button>
+      </div>
+      <form id="form-categoria" class="admin-modal__body">
+        <input type="hidden" id="categoria-index" value="-1">
+        <div class="admin-form-group">
+          <label for="categoria-id">ID (único) *</label>
+          <input type="text" id="categoria-id" placeholder="ex: design" required pattern="[a-z0-9_-]+">
+          <small>Letras minúsculas, números, _ ou -</small>
+        </div>
+        <div class="admin-form-group">
+          <label for="categoria-nome">Nome *</label>
+          <input type="text" id="categoria-nome" required>
+        </div>
+        <div class="admin-form-group">
+          <label for="categoria-icon">Ícone</label>
+          <select id="categoria-icon">
+            <option value="cpu">cpu</option>
+            <option value="flame">flame</option>
+            <option value="briefcase">briefcase</option>
+            <option value="palette">palette</option>
+            <option value="video">video</option>
+            <option value="smartphone">smartphone</option>
+            <option value="book">book</option>
+            <option value="folder">folder</option>
+          </select>
+        </div>
+        <div class="admin-modal__foot">
+          <button type="button" class="btn btn--ghost admin-modal-cancel">Cancelar</button>
+          <button type="submit" class="btn btn--primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

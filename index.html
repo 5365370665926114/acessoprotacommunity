@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <title>Prota Community — Catálogo de Downloads Premium</title>
+  <meta name="description" content="Downloads premium da Prota Community. Ferramentas de IA, packs completos, templates editáveis e materiais exclusivos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Prota Community",
+    "description": "Catálogo de Downloads Premium — Ferramentas de IA, packs completos, templates editáveis e materiais exclusivos.",
+    "url": "https://prota.community"
+  }
+  </script>
+</head>
+<body>
+  <!-- Banner de aviso -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="announcement-bar__inner container">
+      <span class="announcement-bar__icon">🚀</span>
+      <p class="announcement-bar__text">
+        Todos os <strong>produtos completos</strong> e o <strong>painel de puxada de dados</strong> estão disponíveis no nosso grupo do Telegram!
+      </p>
+      <a href="https://t.me/+m_qDQVmBiHc1ODYx" target="_blank" rel="noopener" class="announcement-bar__btn">
+        Entrar no grupo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button type="button" class="announcement-bar__close" id="close-announcement" aria-label="Fechar">&times;</button>
+    </div>
+  </div>
+
+  <!-- Gate de verificação de cliente -->
+  <div class="customer-gate" id="customer-gate">
+    <div class="customer-gate__bg"></div>
+    <div class="customer-gate__card">
+      <div class="customer-gate__logo">
+        <img src="prota-community-logo.png" alt="Prota Community">
+      </div>
+      <h1 class="customer-gate__title">Área exclusiva para clientes</h1>
+      <p class="customer-gate__subtitle">Digite o email e CPF usados na compra para acessar o conteúdo.</p>
+      <form id="gate-form" class="customer-gate__form">
+        <div class="customer-gate__field">
+          <label for="gate-email">Email da compra</label>
+          <input type="email" id="gate-email" placeholder="seu@email.com" required autocomplete="email">
+        </div>
+        <div class="customer-gate__field">
+          <label for="gate-cpf">CPF usado na compra</label>
+          <input type="text" id="gate-cpf" placeholder="000.000.000-00" required maxlength="14" inputmode="numeric" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn--primary customer-gate__btn" id="gate-submit">
+          <span id="gate-btn-text">Verificar e acessar</span>
+          <span id="gate-btn-loading" style="display:none">
+            <svg class="spinner" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31 31" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="0.8s" from="0 12 12" to="360 12 12" repeatCount="indefinite"/></circle></svg>
+            Verificando...
+          </span>
+        </button>
+        <p id="gate-error" class="customer-gate__error"></p>
+      </form>
+      <div class="customer-gate__footer">
+        <p>Algum problema? <a href="https://api.whatsapp.com/send/?phone=5554984150368&text=Ol%C3%A1%2C+tenho+algumas+d%C3%BAvidas+sobre+a+Prota+Community%2C+poderia+me+ajudar%3F&type=phone_number&app_absent=0" target="_blank" rel="noopener">Falar com suporte</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="header" id="header">
+    <nav class="header__inner container">
+      <a href="#" class="header__logo" aria-label="Prota Community">
+        <img src="prota-community-logo.png" alt="Prota Community" class="header__logo-img">
+      </a>
+      <button type="button" class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="header__nav" id="nav">
+        <a href="#categorias" class="header__link">Navegação</a>
+        <a href="#sobre" class="header__link">Sobre</a>
+        <a href="https://t.me/+m_qDQVmBiHc1ODYx" target="_blank" rel="noopener" class="header__btn">
+          <span class="icon-svg" data-icon="telegram"></span>
+          Entrar no grupo
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__bg">
+        <canvas id="particle-canvas" aria-hidden="true"></canvas>
+        <div class="hero__grid"></div>
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+        <div class="hero__orb hero__orb--3"></div>
+        <div class="hero__gradient"></div>
+      </div>
+      <div class="hero__content container">
+        <div class="hero__logo-wrap" data-reveal>
+          <img src="prota-community-logo.png" alt="Prota Community" class="hero__logo">
+          <p class="hero__tagline">CRIADORES · LIDERANÇA · EXCLUSIVIDADE</p>
+        </div>
+        <div class="hero__badge" data-reveal>
+          <span class="hero__badge-dot"></span>
+          <span class="hero__badge-text"><span id="total-produtos">0</span> produtos · 8 categorias</span>
+        </div>
+        <h1 class="hero__title" data-reveal>
+          <span class="hero__title-line">Seus downloads premium,</span>
+          <span class="hero__title-gradient">organizados em um só lugar</span>
+        </h1>
+        <p class="hero__desc" data-reveal>
+          Ferramentas de IA, packs completos, templates editáveis e materiais exclusivos. Tudo pronto para baixar em um clique.
+        </p>
+        <div class="hero__actions" data-reveal>
+          <a href="#categorias" class="btn btn--hero">
+            Escolher categoria
+            <span class="btn__arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
+          </a>
+        </div>
+        <div class="hero__tags" data-reveal>
+          <span class="hero__tag">Downloads gratuitos</span>
+          <span class="hero__tag">Membros da comunidade</span>
+          <span class="hero__tag">Sempre atualizado</span>
+        </div>
+      </div>
+      <div class="hero__scroll" data-reveal>
+        <span>Role para explorar</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <section id="categorias" class="section categorias">
+      <div class="section__glow"></div>
+      <div class="container">
+        <div class="section__head categorias__head">
+          <span class="section__tag" data-reveal>Navegação obrigatória</span>
+          <h2 class="section__title" data-reveal>Escolha uma categoria para ver os produtos</h2>
+          <p class="section__subtitle" data-reveal>Selecione abaixo a categoria desejada para acessar os downloads</p>
+        </div>
+        <div class="categorias__grid" id="categorias-grid"></div>
+
+        <div class="community-links">
+          <p class="community-links__label" data-reveal>Junte-se à comunidade</p>
+          <div class="community-links__grid">
+            <a href="https://t.me/+m_qDQVmBiHc1ODYx" target="_blank" rel="noopener" class="community-card community-card--telegram" data-reveal>
+              <span class="community-card__shine"></span>
+              <span class="community-card__icon icon-svg" data-icon="telegram"></span>
+              <div class="community-card__content">
+                <h3>Grupo Telegram</h3>
+                <p>612+ membros · Entre na comunidade</p>
+              </div>
+              <span class="community-card__arrow icon-svg" data-icon="arrowRight"></span>
+            </a>
+            <a href="https://discord.gg/e5aBVyEn" target="_blank" rel="noopener" class="community-card community-card--discord" data-reveal>
+              <span class="community-card__shine"></span>
+              <span class="community-card__icon icon-svg" data-icon="discord"></span>
+              <div class="community-card__content">
+                <h3>Discord</h3>
+                <p>Comunidade no Discord</p>
+              </div>
+              <span class="community-card__arrow icon-svg" data-icon="arrowRight"></span>
+            </a>
+            <a href="https://t.me/SrProtaOficial" target="_blank" rel="noopener" class="community-card community-card--suporte" data-reveal>
+              <span class="community-card__shine"></span>
+              <span class="community-card__icon icon-svg" data-icon="headset"></span>
+              <div class="community-card__content">
+                <h3>Suporte</h3>
+                <p>Dúvidas? Fale com o suporte</p>
+              </div>
+              <span class="community-card__arrow icon-svg" data-icon="arrowRight"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos" class="section produtos">
+      <div class="section__glow section__glow--bottom"></div>
+      <div class="container">
+        <div class="produtos__empty" id="produtos-empty">
+          <div class="produtos__empty-inner">
+            <span class="produtos__empty-icon icon-svg" data-icon="folder"></span>
+            <h2>Escolha uma categoria acima</h2>
+            <p>Para ver os produtos e fazer downloads, selecione uma das categorias na seção de navegação.</p>
+            <a href="#categorias" class="btn btn--primary">Ver categorias</a>
+          </div>
+        </div>
+        <div class="produtos__content" id="produtos-content" style="display:none">
+          <div class="section__head produtos__head">
+            <span class="section__tag">Produtos</span>
+            <h2 class="section__title" id="produtos-titulo">Catálogo</h2>
+          </div>
+          <div class="produtos__toolbar">
+            <div class="produtos__search-wrap">
+              <span class="produtos__search-icon icon-svg" id="search-icon-svg"></span>
+              <input type="search" id="search" class="produtos__search" placeholder="Buscar por nome ou descrição..." autocomplete="off">
+            </div>
+            <div class="produtos__meta">
+              <span class="produtos__count"><span id="count-display">0</span> produtos</span>
+              <button type="button" class="produtos__clear" id="clear-filter">
+                <span class="icon-svg" data-icon="arrowRight"></span>
+                Trocar categoria
+              </button>
+            </div>
+          </div>
+          <div class="produtos__grid" id="produtos-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="section sobre">
+      <div class="container">
+        <div class="sobre__inner">
+          <div class="sobre__content">
+            <span class="section__tag" data-reveal>Sobre</span>
+            <h2 class="section__title" data-reveal>Prota Community</h2>
+            <p data-reveal>Sua comunidade de downloads premium. Ferramentas de IA, packs completos, templates editáveis, materiais de estudo e muito mais — tudo organizado e de fácil acesso.</p>
+            <p data-reveal>Administrado por <strong>Sʀ. Pʀᴏᴛᴀ 愛</strong>. Respeito, qualidade e suporte dedicado.</p>
+            <ul data-reveal>
+              <li>Sem spam</li>
+              <li>Links autorizados</li>
+              <li>Suporte via Telegram</li>
+            </ul>
+            <a href="https://t.me/SrProtaOficial" target="_blank" rel="noopener" class="btn btn--primary" data-reveal>Falar com suporte</a>
+          </div>
+          <div class="sobre__card" data-reveal>
+            <span class="sobre__card-icon icon-svg" data-icon="smartphoneApp" aria-hidden="true"></span>
+            <h3>Apps em breve</h3>
+            <p>Android e iOS — previsão maio 2026</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="#" aria-label="Prota Community">
+            <img src="prota-community-logo.png" alt="Prota Community" class="footer__logo-img">
+          </a>
+          <p class="footer__tagline">Tudo o que você precisa para centralizar, aprender e vender em um só lugar.</p>
+        </div>
+        <div class="footer__links">
+          <a href="#categorias">Navegação</a>
+          <a href="#sobre">Sobre</a>
+          <a href="https://t.me/+m_qDQVmBiHc1ODYx" target="_blank" rel="noopener">Grupo Telegram</a>
+          <a href="https://t.me/SrProtaOficial" target="_blank" rel="noopener">Suporte</a>
+        </div>
+      </div>
+      <p class="footer__copy">© 2026 Prota Community. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" id="back-to-top" aria-label="Voltar ao topo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+  </a>
+
+  <script src="js/protect.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    try {
+      var d = localStorage.getItem('prota_admin_data');
+      if (d) { var o = JSON.parse(d); PROTA_DATA = o; }
+    } catch (e) {}
+  </script>
+  <script src="js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "builds": [
+    {
+      "src": "api/verify.js",
+      "use": "@vercel/node"
+    }
+  ]
+}

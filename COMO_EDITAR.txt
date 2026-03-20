@@ -1,0 +1,44 @@
+═══════════════════════════════════════════════════════════════
+  PROTA COMMUNITY — Como Editar o Site de Downloads
+═══════════════════════════════════════════════════════════════
+
+► PAINEL ADMIN (recomendado)
+   Acesse: admin.html
+   - Primeira vez: defina uma senha (mín. 8 caracteres)
+   - Ver produtos sem arquivo ou sem imagem
+   - Adicionar, editar, excluir produtos e categorias
+   - Exportar data.js ou aplicar no navegador
+   - 100% local, sem PHP ou MySQL
+
+► ADICIONAR/EDITAR PRODUTOS (manual)
+   Abra: js/data.js
+   
+   Adicione um objeto no array produtos:
+   {
+     cat: 'ia',           // id da categoria (ia, nicho, business, design, videos, crm, educacao, outros)
+     nome: 'Nome do Produto',
+     arquivo: 'files/arquivo.pdf',   // ou URL externa para download.html
+     img: 'photos/foto.jpg',         // opcional, deixe '' para ícone
+     desc: 'Descrição curta'
+   }
+
+► ADICIONAR PRODUTO COM LINK EXTERNO
+   Use arquivo com URL completa:
+   arquivo: 'https://exemplo.com/pack.zip'
+   O site usará automaticamente a página download.html
+
+► CATEGORIAS
+   Edite em js/data.js o array categorias:
+   { id: 'meu-id', nome: 'Nome', icon: 'cpu' }
+   Ícones: cpu, flame, briefcase, palette, video, smartphone, book, folder
+
+► IMAGENS
+   - Coloque em /photos/
+   - Use paths do export Telegram: photos/photo_X_thumb.jpg
+
+► ARQUIVOS
+   - Coloque em /files/
+   - Path: files/nome.ext
+
+► CORES E TEMA
+   - css/site.css — variáveis :root (--purple-500, --bg-800, etc.)
