@@ -1,0 +1,5 @@
+# Ignorar PHP (só funciona no XAMPP local)
+api/verify.php
+
+# Ignorar arquivos grandes de download (não são mais usados no site)
+files/
